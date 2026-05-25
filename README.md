@@ -107,14 +107,16 @@ src/app/
 
 Base URL: `https://my-json-server.typicode.com/makbuluttt/article-hub`
 
-| Method | Endpoint                        | Description              |
-| ------ | ------------------------------- | ------------------------ |
-| GET    | `/articles`                     | List all articles        |
-| GET    | `/articles?category=Technology` | Filter by category       |
-| GET    | `/articles/:id`                 | Get single article       |
-| POST   | `/articles`                     | Create new article       |
-| GET    | `/comments?articleId=1`         | Get comments for article |
-| POST   | `/comments`                     | Add new comment          |
+| Method | Endpoint                  | Description              |
+| ------ | ------------------------- | ------------------------ |
+| GET    | `/articles`               | List all articles        |
+| GET    | `/articles?category=Dogs` | Filter by category       |
+| GET    | `/articles/:id`           | Get single article       |
+| POST   | `/articles`               | Create new article       |
+| PUT    | `/articles/:id`           | Update article           |
+| DELETE | `/articles/:id`           | Delete article           |
+| GET    | `/comments?articleId=1`   | Get comments for article |
+| POST   | `/comments`               | Add new comment          |
 
 ---
 
@@ -206,6 +208,9 @@ API runs at: `http://localhost:3000`
 App is live at: `https://makbuluttt.github.io/article-hub/`
 API is live at: `https://my-json-server.typicode.com/makbuluttt/article-hub`
 
+⚠️ Demo mode — data modifications are disabled
+my-json-server → GET only
+
 ---
 
 ## Angular Material Theme
@@ -232,13 +237,13 @@ Forbidden attributes: `onerror`, `onload`, `onclick`, `onmouseover`, `style`
 
 ## Routing
 
-| Route                                | Component              | Description              |
-| ------------------------------------ | ---------------------- | ------------------------ |
-| `/`                                  | redirect               | Redirects to `/articles` |
-| `/articles`                          | ArticleListComponent   | Browse all articles      |
-| `/articles/create`                   | ArticleFormComponent   | Create new article       |
-| `/articles/:id`                      | ArticleDetailComponent | Read article             |
-| `/articles/:id(side-panel:comments)` | CommentListComponent   | Comments panel           |
+| Route                               | Component              | Description         |
+| ----------------------------------- | ---------------------- | ------------------- |
+| `/`                                 | ArticleListComponent   | Browse all articles |
+| `/article/create`                   | ArticleFormComponent   | Create new article  |
+| `/article/:id/edit`                 | ArticleFormComponent   | Edit article        |
+| `/article/:id`                      | ArticleDetailComponent | Read article        |
+| `/article/:id(side-panel:comments)` | CommentListComponent   | Comments panel      |
 
 ---
 
