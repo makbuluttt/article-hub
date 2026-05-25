@@ -4,6 +4,12 @@ A modern article publishing platform built with Angular 18. Users can create and
 
 ---
 
+## Live Demo
+
+🌐 **[https://makbuluttt.github.io/article-hub/](https://makbuluttt.github.io/article-hub/)**
+
+---
+
 ## Tech Stack
 
 | Technology       | Version | Purpose              |
@@ -99,7 +105,7 @@ src/app/
 
 ## API Endpoints
 
-Base URL: `http://localhost:3000`
+Base URL: `https://my-json-server.typicode.com/makbuluttt/article-hub`
 
 | Method | Endpoint                        | Description              |
 | ------ | ------------------------------- | ------------------------ |
@@ -174,7 +180,9 @@ npm install -g @angular/cli@18
 npm install -g json-server
 ```
 
-### Running the App
+## Running the App
+
+### Local Development
 
 You need two terminals:
 
@@ -192,6 +200,11 @@ ng serve --open
 
 App runs at: `http://localhost:4200`
 API runs at: `http://localhost:3000`
+
+### Production
+
+App is live at: `https://makbuluttt.github.io/article-hub/`
+API is live at: `https://my-json-server.typicode.com/makbuluttt/article-hub`
 
 ---
 
