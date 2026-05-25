@@ -12,16 +12,16 @@ A modern article publishing platform built with Angular 18. Users can create and
 
 ## Tech Stack
 
-| Technology       | Version | Purpose              |
-| ---------------- | ------- | -------------------- |
-| Angular          | 18.2.x  | Frontend framework   |
-| Angular Material | 18.2.x  | UI component library |
-| ngx-quill        | 26.x    | Rich text editor     |
-| JSON Server      | latest  | Mock REST API        |
-| DOMPurify        | latest  | XSS protection       |
-| RxJS             | 7.x     | Reactive programming |
-| TypeScript       | 5.x     | Type safety          |
-| SCSS             | -       | Styling              |
+| Technology       | Version       | Purpose              |
+| ---------------- | ------------- | -------------------- |
+| Angular          | 18.2.0        | Frontend framework   |
+| Angular Material | 18.2.14       | UI component library |
+| ngx-quill        | 26.0.0        | Rich text editor     |
+| JSON Server      | 1.0.0-beta.15 | Mock REST API        |
+| DOMPurify        | 3.4.5         | XSS protection       |
+| RxJS             | 7.8.0         | Reactive programming |
+| TypeScript       | 5.5.2         | Type safety          |
+| SCSS             | -             | Styling              |
 
 ---
 
@@ -34,6 +34,8 @@ A modern article publishing platform built with Angular 18. Users can create and
 - Optional category selection from predefined enum
 - Auto-generated ISO 8601 publish date on submission
 - Unsaved changes protection with Material dialog
+- Edit existing articles
+- Delete articles with confirmation
 
 ### Article List
 
@@ -49,6 +51,7 @@ A modern article publishing platform built with Angular 18. Users can create and
 - Full article content rendered safely
 - Category chip aligned with title
 - Comments count button
+- Edit and Delete Article
 
 ### Comments Panel
 
@@ -96,6 +99,7 @@ src/app/
     ├── comment-list/               → Comments panel list
     ├── comment-form/               → Add new comment form
     ├── confirm-dialog/             → Unsaved changes dialog
+    ├── delete-dialog/              → Delete warning dialog
     ├── navbar/                     → Top navigation bar
     └── pipes/
         └── safe-html.pipe.ts       → DOMPurify sanitization pipe
@@ -169,7 +173,7 @@ enum Category {
 
 ```bash
 # Clone the repository
-git clone <repository-url>
+git clone https://github.com/makbuluttt/article-hub.git
 cd article-project
 
 # Install dependencies
