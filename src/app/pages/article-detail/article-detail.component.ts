@@ -11,6 +11,8 @@ import { CommentService } from '../../services/comment.service';
 import { EventService } from '../../services/event.service';
 import { Article } from '../../models/article.model';
 import { SafeHtmlPipe } from '../../shared/pipes/safe-html.pipe';
+import { MatDialog } from '@angular/material/dialog';
+import { DeleteDialogComponent } from '../../shared/delete-dialog/delete-dialog.component';
 
 @Component({
   selector: 'app-article-detail',
@@ -40,7 +42,8 @@ export class ArticleDetailComponent implements OnInit, OnDestroy {
     private router: Router,
     private articleService: ArticleService,
     private commentService: CommentService,
-    private eventService: EventService
+    private eventService: EventService,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -69,7 +72,7 @@ export class ArticleDetailComponent implements OnInit, OnDestroy {
       },
       error: () => {
         this.loading = false;
-        this.router.navigate(['/articles']);
+        this.router.navigate(['/']);
       },
     });
   }
@@ -79,6 +82,27 @@ export class ArticleDetailComponent implements OnInit, OnDestroy {
       next: (comments) => {
         this.commentCount = comments.length;
       },
+    });
+  }
+
+  editArticle(): void {
+    this.router.navigate(['/article', this.articleId, 'edit']);
+  }
+
+  deleteArticle(): void {
+    const dialogRef = this.dialog.open(DeleteDialogComponent, {
+      width: '400px',
+      disableClose: true,
+    });
+
+    dialogRef.afterClosed().subscribe((confirmed) => {
+      if (confirmed) {
+        this.articleService.delete(this.articleId).subscribe({
+          next: () => {
+            this.router.navigate(['/']);
+          },
+        });
+      }
     });
   }
 

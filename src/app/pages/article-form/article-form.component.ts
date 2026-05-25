@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import {
   ReactiveFormsModule,
@@ -37,6 +37,8 @@ export class ArticleFormComponent implements OnInit {
   form!: FormGroup;
   categories = Object.values(Category);
   submitting = false;
+  isEditMode = false;
+  articleId!: number;
 
   quillModules = {
     toolbar: [
@@ -53,14 +55,41 @@ export class ArticleFormComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private articleService: ArticleService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
+    this.initiliazeForm();
+
+    const id = this.route.snapshot.paramMap.get('id');
+    if (id) {
+      this.isEditMode = true;
+      this.articleId = Number(id);
+      this.loadArticle(this.articleId);
+    }
+  }
+
+  initiliazeForm() {
     this.form = this.fb.group({
       title: ['', [Validators.required, Validators.maxLength(101)]],
       content: ['', Validators.required],
       category: [null],
+    });
+  }
+
+  loadArticle(id: number) {
+    this.articleService.getById(id).subscribe({
+      next: (article) => {
+        this.form.patchValue({
+          title: article.title,
+          content: article.content,
+          category: article.category || null,
+        });
+      },
+      error: () => {
+        this.router.navigate(['/']);
+      },
     });
   }
 
@@ -116,18 +145,34 @@ export class ArticleFormComponent implements OnInit {
       publishedDate: new Date().toISOString(),
     };
 
-    this.articleService.create(article).subscribe({
-      next: () => {
-        this.router.navigate(['/']);
-      },
-      error: () => {
-        this.submitting = false;
-        this.form.markAsDirty();
-      },
-    });
+    if (this.isEditMode) {
+      this.articleService.update(this.articleId, article).subscribe({
+        next: () => {
+          this.router.navigate(['/article', this.articleId]);
+        },
+        error: () => {
+          this.submitting = false;
+          this.form.markAsDirty();
+        },
+      });
+    } else {
+      this.articleService.create(article).subscribe({
+        next: () => {
+          this.router.navigate(['/']);
+        },
+        error: () => {
+          this.submitting = false;
+          this.form.markAsDirty();
+        },
+      });
+    }
   }
 
   onCancel(): void {
-    this.router.navigate(['/']);
+    if (this.isEditMode) {
+      this.router.navigate(['/article', this.articleId]);
+    } else {
+      this.router.navigate(['/']);
+    }
   }
 }

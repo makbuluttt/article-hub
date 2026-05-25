@@ -102,3 +102,21 @@
     font-size: 0.95rem;
   }
 }
+
+.article-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 0;
+
+  .right-actions {
+    display: flex;
+    gap: 8px;
+  }
+
+  button {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+}

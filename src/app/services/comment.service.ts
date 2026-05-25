@@ -10,6 +10,8 @@ export class CommentService {
   private apiUrl =
     'https://my-json-server.typicode.com/makbuluttt/article-hub/comments';
 
+  // private apiUrl = 'http://localhost:3000/comments';
+
   constructor(private http: HttpClient) {}
 
   getByArticleId(articleId: number): Observable<ArticleComment[]> {

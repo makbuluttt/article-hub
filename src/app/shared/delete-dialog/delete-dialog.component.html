@@ -1,0 +1,19 @@
+<div class="dialog-container">
+  <div class="dialog-icon">
+    <mat-icon>delete_forever</mat-icon>
+  </div>
+
+  <h2 mat-dialog-title>Delete Article</h2>
+
+  <mat-dialog-content>
+    <p>This article will be <strong>permanently deleted</strong>.</p>
+    <p>This action cannot be undone.</p>
+  </mat-dialog-content>
+
+  <mat-dialog-actions>
+    <button mat-raised-button (click)="cancel()">Cancel</button>
+    <button mat-raised-button color="warn" (click)="confirm()">
+      Delete Article
+    </button>
+  </mat-dialog-actions>
+</div>

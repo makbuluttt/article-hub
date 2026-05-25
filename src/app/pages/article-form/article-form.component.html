@@ -4,7 +4,7 @@
       <mat-icon>arrow_back</mat-icon>
       Back to Articles
     </button>
-    <h1>New Article</h1>
+    <h1>{{ isEditMode ? "Edit Article" : "New Article" }}</h1>
   </div>
 
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
@@ -56,7 +56,13 @@
         type="submit"
         [disabled]="form.invalid || submitting"
       >
-        {{ submitting ? "Publishing..." : "Publish Article" }}
+        {{
+          submitting
+            ? "Saving..."
+            : isEditMode
+            ? "Save Changes"
+            : "Publish Article"
+        }}
       </button>
     </div>
   </form>

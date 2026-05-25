@@ -18,6 +18,14 @@ export const routes: Routes = [
     canDeactivate: [unsavedChangesGuard],
   },
   {
+    path: 'article/:id/edit',
+    loadComponent: () =>
+      import('./pages/article-form/article-form.component').then(
+        (m) => m.ArticleFormComponent
+      ),
+    canDeactivate: [unsavedChangesGuard],
+  },
+  {
     path: 'article/:id',
     loadComponent: () =>
       import('./pages/article-detail/article-detail.component').then(

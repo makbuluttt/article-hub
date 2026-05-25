@@ -10,6 +10,8 @@ export class ArticleService {
   private apiUrl =
     'https://my-json-server.typicode.com/makbuluttt/article-hub/articles';
 
+  // private apiUrl = 'http://localhost:3000/articles';
+
   constructor(private http: HttpClient) {}
 
   getAll(category?: string): Observable<Article[]> {
@@ -26,5 +28,13 @@ export class ArticleService {
 
   create(article: Article): Observable<Article> {
     return this.http.post<Article>(this.apiUrl, article);
+  }
+
+  update(id: number, article: Article): Observable<Article> {
+    return this.http.put<Article>(`${this.apiUrl}/${id}`, article);
+  }
+
+  delete(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }

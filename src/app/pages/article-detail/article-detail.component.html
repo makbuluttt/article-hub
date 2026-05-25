@@ -28,11 +28,22 @@
 
   <mat-divider />
 
-  <div class="comments-trigger">
+  <div class="article-actions">
     <button mat-stroked-button (click)="toggleComments()">
       <mat-icon>comment</mat-icon>
       Comments ({{ commentCount }})
     </button>
+
+    <div class="right-actions">
+      <button mat-stroked-button color="primary" (click)="editArticle()">
+        <mat-icon>edit</mat-icon>
+        Edit
+      </button>
+      <button mat-stroked-button color="warn" (click)="deleteArticle()">
+        <mat-icon>delete</mat-icon>
+        Delete
+      </button>
+    </div>
   </div>
 
   }
