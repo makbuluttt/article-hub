@@ -7,7 +7,8 @@ import { ArticleComment } from '../models/article-comment.model';
   providedIn: 'root',
 })
 export class CommentService {
-  private apiUrl = 'http://localhost:3000/comments';
+  private apiUrl =
+    'https://my-json-server.typicode.com/makbuluttt/article-hub/comments';
 
   constructor(private http: HttpClient) {}
 

@@ -7,7 +7,8 @@ import { Article } from '../models/article.model';
   providedIn: 'root',
 })
 export class ArticleService {
-  private apiUrl = 'http://localhost:3000/articles';
+  private apiUrl =
+    'https://my-json-server.typicode.com/makbuluttt/article-hub/articles';
 
   constructor(private http: HttpClient) {}
 
