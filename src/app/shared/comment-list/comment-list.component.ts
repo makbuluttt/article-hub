@@ -41,7 +41,7 @@ export class CommentListComponent implements OnInit {
 
   getArticleIdFromUrl(): void {
     const url = this.router.url;
-    const match = url.match(/\/articles\/(\d+)/);
+    const match = url.match(/\/article\/(\d+)/);
     if (match) {
       const id = Number(match[1]);
       if (id !== this.articleId) {
@@ -68,7 +68,7 @@ export class CommentListComponent implements OnInit {
   close(): void {
     this.router.navigate([
       {
-        outlets: { primary: ['articles', this.articleId], 'side-panel': null },
+        outlets: { primary: ['article', this.articleId], 'side-panel': null },
       },
     ]);
   }

@@ -118,7 +118,7 @@ export class ArticleFormComponent implements OnInit {
 
     this.articleService.create(article).subscribe({
       next: () => {
-        this.router.navigate(['/articles']);
+        this.router.navigate(['/']);
       },
       error: () => {
         this.submitting = false;
@@ -128,6 +128,6 @@ export class ArticleFormComponent implements OnInit {
   }
 
   onCancel(): void {
-    this.router.navigate(['/articles']);
+    this.router.navigate(['/']);
   }
 }

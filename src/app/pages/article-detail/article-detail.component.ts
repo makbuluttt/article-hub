@@ -97,7 +97,7 @@ export class ArticleDetailComponent implements OnInit, OnDestroy {
       this.router.navigate([
         {
           outlets: {
-            primary: ['articles', this.articleId],
+            primary: ['article', this.articleId],
             'side-panel': null,
           },
         },
@@ -106,7 +106,7 @@ export class ArticleDetailComponent implements OnInit, OnDestroy {
       this.router.navigate([
         {
           outlets: {
-            primary: ['articles', this.articleId],
+            primary: ['article', this.articleId],
             'side-panel': ['comments'],
           },
         },
@@ -115,7 +115,7 @@ export class ArticleDetailComponent implements OnInit, OnDestroy {
   }
 
   goBack(): void {
-    this.router.navigate(['/articles']);
+    this.router.navigate(['/']);
   }
 
   ngOnDestroy(): void {

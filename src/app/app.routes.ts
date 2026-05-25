@@ -4,18 +4,13 @@ import { unsavedChangesGuard } from './guards/unsaved-changes.guard';
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'articles',
-    pathMatch: 'full',
-  },
-  {
-    path: 'articles',
     loadComponent: () =>
       import('./pages/article-list/article-list.component').then(
         (m) => m.ArticleListComponent
       ),
   },
   {
-    path: 'articles/create',
+    path: 'article/create',
     loadComponent: () =>
       import('./pages/article-form/article-form.component').then(
         (m) => m.ArticleFormComponent
@@ -23,7 +18,7 @@ export const routes: Routes = [
     canDeactivate: [unsavedChangesGuard],
   },
   {
-    path: 'articles/:id',
+    path: 'article/:id',
     loadComponent: () =>
       import('./pages/article-detail/article-detail.component').then(
         (m) => m.ArticleDetailComponent
