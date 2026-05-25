@@ -1,0 +1,32 @@
+<div class="comment-form">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Write a comment...</mat-label>
+      <textarea
+        matInput
+        formControlName="content"
+        rows="3"
+        placeholder="Share your thoughts..."
+      >
+      </textarea>
+      @if (form.get('content')?.hasError('required') &&
+      form.get('content')?.touched) {
+      <mat-error>Comment cannot be empty</mat-error>
+      } @if (form.get('content')?.hasError('minlength') &&
+      form.get('content')?.touched) {
+      <mat-error>Comment must be at least 3 characters</mat-error>
+      }
+    </mat-form-field>
+
+    <div class="actions">
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="form.invalid || submitting"
+      >
+        {{ submitting ? "Posting..." : "Post Comment" }}
+      </button>
+    </div>
+  </form>
+</div>

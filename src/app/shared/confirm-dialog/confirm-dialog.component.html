@@ -1,0 +1,23 @@
+<div class="dialog-container">
+  <div class="dialog-icon">
+    <mat-icon>warning_amber</mat-icon>
+  </div>
+
+  <h2 mat-dialog-title>Unsaved Changes</h2>
+
+  <mat-dialog-content>
+    <p>
+      You have <strong>unsaved changes</strong> that will be permanently lost.
+    </p>
+    <p>Are you sure you want to leave this page?</p>
+  </mat-dialog-content>
+
+  <mat-dialog-actions>
+    <button mat-raised-button color="primary" (click)="cancel()">
+      Stay on Page
+    </button>
+    <button mat-stroked-button color="warn" (click)="confirm()">
+      Leave Anyway
+    </button>
+  </mat-dialog-actions>
+</div>

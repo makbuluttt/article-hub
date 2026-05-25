@@ -1,27 +1,240 @@
-# ArticleProject
+# ArticleHub
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.21.
+A modern article publishing platform built with Angular 18. Users can create and publish articles using a rich text editor, browse and filter articles by category, and engage through a sliding comments panel.
 
-## Development server
+---
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Tech Stack
 
-## Code scaffolding
+| Technology       | Version | Purpose              |
+| ---------------- | ------- | -------------------- |
+| Angular          | 18.2.x  | Frontend framework   |
+| Angular Material | 18.2.x  | UI component library |
+| ngx-quill        | 26.x    | Rich text editor     |
+| JSON Server      | latest  | Mock REST API        |
+| DOMPurify        | latest  | XSS protection       |
+| RxJS             | 7.x     | Reactive programming |
+| TypeScript       | 5.x     | Type safety          |
+| SCSS             | -       | Styling              |
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+---
 
-## Build
+## Features
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### Article Management
 
-## Running unit tests
+- Create articles with a rich text editor (Quill)
+- Title limited to 101 characters with live counter
+- Optional category selection from predefined enum
+- Auto-generated ISO 8601 publish date on submission
+- Unsaved changes protection with Material dialog
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### Article List
 
-## Running end-to-end tests
+- Responsive grid layout
+- Search articles by title with 300ms debounce
+- Filter articles by category
+- Truncated excerpt (150 chars, HTML stripped)
+- Publish date converted from UTC to local browser timezone
+- Empty state when no articles available
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+### Article Detail
 
-## Further help
+- Full article content rendered safely
+- Category chip aligned with title
+- Comments count button
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+### Comments Panel
+
+- Auxiliary route navigation `/articles/:id(side-panel:comments)`
+- Slides in from the right with CSS animation
+- Backdrop click to close
+- Auto closes when navigating away
+- Live comment count updates after posting
+- Plain text only (HTML stripped for security)
+
+### Security
+
+- Article content sanitized with DOMPurify
+- Article titles stripped of all HTML
+- Comments stripped of all HTML (plain text only)
+- Angular's DomSanitizer used for safe HTML rendering
+- XSS protection on all user inputs
+
+---
+
+## Project Structure
+
+```
+src/app/
+├── guards/
+│   └── unsaved-changes.guard.ts    → CanDeactivate guard
+│
+├── models/
+│   ├── article.model.ts            → Article interface
+│   ├── article-comment.model.ts    → ArticleComment interface
+│   └── category.enum.ts           → Category enum
+│
+├── pages/
+│   ├── article-list/               → Browse & filter articles
+│   │   └── article-card/           → Reusable article card
+│   ├── article-detail/             → Read full article
+│   └── article-form/               → Create new article
+│
+├── services/
+│   ├── article.service.ts          → Article HTTP calls
+│   ├── comment.service.ts          → Comment HTTP calls
+│   └── event.service.ts            → Cross-component events
+│
+└── shared/
+    ├── comment-list/               → Comments panel list
+    ├── comment-form/               → Add new comment form
+    ├── confirm-dialog/             → Unsaved changes dialog
+    ├── navbar/                     → Top navigation bar
+    └── pipes/
+        └── safe-html.pipe.ts       → DOMPurify sanitization pipe
+```
+
+---
+
+## API Endpoints
+
+Base URL: `http://localhost:3000`
+
+| Method | Endpoint                        | Description              |
+| ------ | ------------------------------- | ------------------------ |
+| GET    | `/articles`                     | List all articles        |
+| GET    | `/articles?category=Technology` | Filter by category       |
+| GET    | `/articles/:id`                 | Get single article       |
+| POST   | `/articles`                     | Create new article       |
+| GET    | `/comments?articleId=1`         | Get comments for article |
+| POST   | `/comments`                     | Add new comment          |
+
+---
+
+## Data Models
+
+### Article
+
+```typescript
+interface Article {
+  id?: number;
+  title: string; // max 101 characters
+  content: string; // rich text HTML
+  category?: Category; // optional enum value
+  publishedDate: string; // ISO 8601 format
+}
+```
+
+### ArticleComment
+
+```typescript
+interface ArticleComment {
+  id?: number;
+  articleId: number;
+  content: string; // plain text only
+  createdAt: string; // ISO 8601 format
+}
+```
+
+### Category Enum
+
+```typescript
+enum Category {
+  Cats = "Cats",
+  Dogs = "Dogs",
+  Not_Funny = "Not Funny",
+}
+```
+
+---
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js 20.x
+- npm 10.x
+- Angular CLI 18.x
+
+### Installation
+
+```bash
+# Clone the repository
+git clone <repository-url>
+cd article-project
+
+# Install dependencies
+npm install
+
+# Install Angular CLI globally
+npm install -g @angular/cli@18
+
+# Install JSON Server globally
+npm install -g json-server
+```
+
+### Running the App
+
+You need two terminals:
+
+**Terminal 1 — Start the mock API:**
+
+```bash
+json-server --watch db.json --port 3000
+```
+
+**Terminal 2 — Start the Angular app:**
+
+```bash
+ng serve --open
+```
+
+App runs at: `http://localhost:4200`
+API runs at: `http://localhost:3000`
+
+---
+
+## Angular Material Theme
+
+Using the `azure-blue` prebuilt theme from Angular Material.
+
+---
+
+## Security Considerations
+
+All user inputs are sanitized before saving and before rendering:
+
+| Input            | Sanitization                                          |
+| ---------------- | ----------------------------------------------------- |
+| Article title    | All HTML stripped — plain text only                   |
+| Article content  | Safe Quill HTML tags only — scripts/iframes forbidden |
+| Comments         | All HTML stripped — plain text only                   |
+| Rendered content | DOMPurify + Angular DomSanitizer                      |
+
+Forbidden tags: `script`, `iframe`, `object`, `embed`, `form`
+Forbidden attributes: `onerror`, `onload`, `onclick`, `onmouseover`, `style`
+
+---
+
+## Routing
+
+| Route                                | Component              | Description              |
+| ------------------------------------ | ---------------------- | ------------------------ |
+| `/`                                  | redirect               | Redirects to `/articles` |
+| `/articles`                          | ArticleListComponent   | Browse all articles      |
+| `/articles/create`                   | ArticleFormComponent   | Create new article       |
+| `/articles/:id`                      | ArticleDetailComponent | Read article             |
+| `/articles/:id(side-panel:comments)` | CommentListComponent   | Comments panel           |
+
+---
+
+## Available Scripts
+
+```bash
+# Start development server
+ng serve
+
+# Build for production
+ng build
+```

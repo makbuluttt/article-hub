@@ -1,0 +1,91 @@
+{
+  "articles": [
+    {
+      "id": 1,
+      "title": "Getting Started with Angular 18",
+      "content": "<p>Angular 18 brings many exciting features including signals and standalone components.</p>",
+      "category": "Dogs",
+      "publishedDate": "2024-01-01T10:30:00.000Z"
+    },
+    {
+      "id": 2,
+      "title": "Healthy Living Tips",
+      "content": "<p>Living healthy is all about balance and consistency in your daily habits.</p>",
+      "category": "Cats",
+      "publishedDate": "2024-01-05T08:00:00.000Z"
+    },
+    {
+      "id": 3,
+      "title": "My Travel Diary",
+      "content": "<p>Exploring the world one city at a time, starting with Istanbul.</p>",
+      "category": null,
+      "publishedDate": "2024-01-10T14:00:00.000Z"
+    },
+    {
+      "id": 3,
+      "title": "My Travel Diary",
+      "content": "<p>Exploring the world one city at a time, starting with Istanbul.</p>Exploring the world one city at a time, starting with Istanbul.</p>Exploring the world one city at a time, starting with Istanbul.</p>",
+      "category": "Not Funny",
+      "publishedDate": "2024-01-10T14:00:00.000Z"
+    },
+    {
+      "title": "Test an article if it is looking good or not",
+      "content": "<p>Testing&nbsp;an&nbsp;article&nbsp;if&nbsp;it&nbsp;is&nbsp;looking&nbsp;good&nbsp;or&nbsp;not&nbsp;we&nbsp;need&nbsp;to&nbsp;submit&nbsp;this&nbsp;one&nbsp;and&nbsp;see&nbsp;if&nbsp;it&nbsp;is&nbsp;working&nbsp;or&nbsp;not</p>",
+      "category": "Not Funny",
+      "publishedDate": "2026-05-24T15:11:24.022Z",
+      "id": 4
+    },
+    {
+      "title": "testing text editor with lots of texts ",
+      "content": "<p><strong>Bold&nbsp;text&nbsp;tested</strong></p><p><em>Italic&nbsp;text&nbsp;tested</em></p><p><u>Underlined&nbsp;text&nbsp;tested</u></p><p></p><pre data-language=\"plain\">codes are here to test\nHello World\n</pre>",
+      "category": null,
+      "publishedDate": "2026-05-24T21:21:47.425Z",
+      "id": 5
+    },
+    {
+      "title": "testing submission the form",
+      "content": "<p>testing&nbsp;submission</p>",
+      "category": null,
+      "publishedDate": "2026-05-24T21:26:11.461Z",
+      "id": 6
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "articleId": 1,
+      "content": "Great article, very helpful!",
+      "createdAt": "2024-01-02T09:00:00.000Z"
+    },
+    {
+      "id": 2,
+      "articleId": 1,
+      "content": "Thanks for sharing this!",
+      "createdAt": "2024-01-03T11:00:00.000Z"
+    },
+    {
+      "articleId": 1,
+      "content": "test comment",
+      "createdAt": "2026-05-24T17:07:33.716Z",
+      "id": 3
+    },
+    {
+      "articleId": 1,
+      "content": "test second comment",
+      "createdAt": "2026-05-24T17:07:57.377Z",
+      "id": 4
+    },
+    {
+      "articleId": 2,
+      "content": "test comment",
+      "createdAt": "2026-05-24T17:09:13.983Z",
+      "id": 5
+    },
+    {
+      "articleId": 1,
+      "content": "",
+      "createdAt": "2026-05-24T20:33:07.655Z",
+      "id": 6
+    }
+  ]
+}

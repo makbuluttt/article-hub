@@ -1,0 +1,39 @@
+<div class="article-detail">
+  @if (loading) {
+  <div class="loading">
+    <p>Loading article...</p>
+  </div>
+  } @if (!loading && article) {
+
+  <button mat-button class="back-btn" (click)="goBack()">
+    <mat-icon>arrow_back</mat-icon>
+    Back to Articles
+  </button>
+
+  <div class="article-header">
+    <div class="title-row">
+      <h1 class="title">{{ article.title }}</h1>
+      @if (article.category) {
+      <mat-chip-set>
+        <mat-chip>{{ article.category }}</mat-chip>
+      </mat-chip-set>
+      }
+    </div>
+    <p class="date">📅 {{ getLocalDate(article.publishedDate) }}</p>
+  </div>
+
+  <mat-divider />
+
+  <div class="article-content" [innerHTML]="article.content | safeHtml"></div>
+
+  <mat-divider />
+
+  <div class="comments-trigger">
+    <button mat-stroked-button (click)="toggleComments()">
+      <mat-icon>comment</mat-icon>
+      Comments ({{ commentCount }})
+    </button>
+  </div>
+
+  }
+</div>

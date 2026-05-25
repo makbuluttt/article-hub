@@ -1,0 +1,46 @@
+<div class="article-list">
+  <div class="header">
+    <h1>Articles</h1>
+  </div>
+
+  <mat-form-field appearance="outline" class="search-field">
+    <mat-label>Search articles...</mat-label>
+    <input
+      matInput
+      [(ngModel)]="searchQuery"
+      (ngModelChange)="onSearchChange($event)"
+      placeholder="Type to search by title"
+    />
+    <mat-icon matSuffix>search</mat-icon>
+  </mat-form-field>
+
+  <div class="filters">
+    @for (category of categories; track category) {
+    <button
+      mat-button
+      [class.active]="selectedCategory === category"
+      (click)="filterByCategory(category)"
+    >
+      {{ category }}
+    </button>
+    }
+  </div>
+
+  @if (loading) {
+  <div class="empty-state">
+    <mat-icon>hourglass_empty</mat-icon>
+    <p>Loading articles...</p>
+  </div>
+  } @if (!loading && filteredArticles.length > 0) {
+  <div class="grid">
+    @for (article of filteredArticles; track article.id) {
+    <app-article-card [article]="article" />
+    }
+  </div>
+  } @if (!loading && filteredArticles.length === 0) {
+  <div class="empty-state">
+    <mat-icon>inbox</mat-icon>
+    <h2>No articles available</h2>
+  </div>
+  }
+</div>

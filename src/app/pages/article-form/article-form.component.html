@@ -1,0 +1,63 @@
+<div class="article-form">
+  <div class="header">
+    <button mat-button (click)="onCancel()">
+      <mat-icon>arrow_back</mat-icon>
+      Back to Articles
+    </button>
+    <h1>New Article</h1>
+  </div>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Title</mat-label>
+      <input
+        matInput
+        formControlName="title"
+        placeholder="Enter article title"
+      />
+      <mat-hint align="end">{{ titleLength }}/101</mat-hint>
+      @if (form.get('title')?.hasError('required') &&
+      form.get('title')?.touched) {
+      <mat-error>Title is required</mat-error>
+      } @if (form.get('title')?.hasError('maxlength')) {
+      <mat-error>Title cannot exceed 101 characters</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Category (optional)</mat-label>
+      <mat-select formControlName="category">
+        <mat-option [value]="null">None</mat-option>
+        @for (cat of categories; track cat) {
+        <mat-option [value]="cat">{{ cat }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <div class="editor-wrapper">
+      <label class="editor-label">Content</label>
+      <quill-editor
+        formControlName="content"
+        [modules]="quillModules"
+        placeholder="Write your article here..."
+        class="editor"
+      >
+      </quill-editor>
+      @if (form.get('content')?.hasError('required') &&
+      form.get('content')?.touched) {
+      <mat-error class="content-error">Content is required</mat-error>
+      }
+    </div>
+
+    <div class="actions">
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="form.invalid || submitting"
+      >
+        {{ submitting ? "Publishing..." : "Publish Article" }}
+      </button>
+    </div>
+  </form>
+</div>
